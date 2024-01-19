@@ -48,6 +48,7 @@ def read_config(verbose=False, **update_conf):
     diam_int = 11.213,                  # effective central obscuration in m
     diam_vpm = 16.273,                  # vortex phase mask (19/45*diam_nominal)
     diam_lom = 16.273,                  # lyot occulting mask (19/45*diam_nominal)
+    disp = False,
     f_pupil = 'pupil/ELT_fullM1.fits',  # entrance pupil file
     spi_width = 0.54,                   # spider width in m
     spi_angles = [0,60,120,180,240,300],# spider angles in deg
@@ -87,7 +88,7 @@ def read_config(verbose=False, **update_conf):
     mag_ref = 0,                        # reference magnitude for star and background fluxes
     flux_star = 8.999e+10,              # [e-/s] HCI-L long, mag 0 (Jan 21, 2020)
     flux_bckg = 8.878e+04,              # [e-/s/pix]
-    call_ScopeSim = False,              # true if interfacing ScopeSim
+#    call_ScopeSim = False,              # true if interfacing ScopeSim
     duration = 3600,                    # duration of the ADI sequence in s
     dit = 0.3,                          # detector integration time in s
     lat = -24.59,                       # telescope latitude in deg (Armazones=-24.59 ,Paranal -24.63)
@@ -160,7 +161,7 @@ def read_config(verbose=False, **update_conf):
     nframes_avg = 2,                   # number of frames averaged for off-axis psf
 
     add_phase = True,                   # phase screens (SCAO residuals, NCPA, petal piston)
-    f_phase = 'wavefront/COMPASS_201810_RandomWind_100screens_meters.fits',
+    f_phase = 'wavefront/cube_Cfull_20211007_3600s_300ms_0piston_meters_scao_only_L_285.fits', # 'wavefront/COMPASS_201810_RandomWind_100screens_meters.fits',
     add_amp = False,                    # amplitude screens (Talbot effect)
     f_amp = 'wavefront/talbot_LM_rep_6_field_24.fits',
     ncpa_sta = 35.9,                    # static (nm rms)

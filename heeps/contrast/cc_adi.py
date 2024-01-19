@@ -100,7 +100,7 @@ def cc_adi(dir_output='output_files', band='L', mode='RAVC', add_bckg=False,
     # get off-axis transmission
     if 'VC' in mode and f_oat is not None:
         OAT = fits.getdata(f_oat)
-        OAT = (OAT[1], OAT[0])
+        OAT = (OAT[0], OAT[1])
         if verbose is True:
             print("   load vortex off-axis transmission from '%s'"%os.path.basename(f_oat))
     else:
@@ -117,7 +117,7 @@ def cc_adi(dir_output='output_files', band='L', mode='RAVC', add_bckg=False,
     if cpu_count == None:
         cpu_count = mpro.cpu_count()
     algo_dict = dict(nproc=cpu_count)
-    algo = vip_hci.medsub.median_sub
+    algo = vip_hci.psfsub.medsub.median_sub
     # contrast curve after post-processing (pscale in arcsec)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore") # for AstropyDeprecationWarning
