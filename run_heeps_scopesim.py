@@ -16,7 +16,8 @@ def run_heeps(savename='contrast_curve.png'):
     # will be updated to match the selected spectral band and HCI mode:
     #   lam, pscale, flux_star, flux_bckg, ls_dRspi, ls_dRint, npupil, ndet,
     #   ravc_t, ravc_r
-    conf = heeps.config.update_config(saveconf=True, verbose=True, call_ScopeSim=True,ScopeSim_LMS=False,**conf) 
+    conf.update(call_ScopeSim=True,ScopeSim_LMS=False,mode="CVC",add_bckg=True,nframes=12000,mag=1,band="N2",dit=0.011)
+    conf = heeps.config.update_config(saveconf=True, verbose=True,**conf) 
 
     # 3. Load entrance pupil, and create 'wavefront' object
     wf = heeps.pupil.pupil(savefits=True, verbose=True, **conf)

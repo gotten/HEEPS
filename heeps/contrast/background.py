@@ -93,7 +93,7 @@ def background(psf_ON, psf_OFF, header=None, mode='RAVC', lam=3.8e-6, dit=0.3,
             hdu.header.append("CVAL3")
 
         for band in conf['band_specs']:
-            print(band,lam)
+            print(band,conf['band_specs'][band]['lam'])
             if np.abs(conf['band_specs'][band]['lam'] - lam)<0.05e-6:
                 hdu.header['BAND']=band
                 hdu.header['LAM']=lam
@@ -126,15 +126,20 @@ def background(psf_ON, psf_OFF, header=None, mode='RAVC', lam=3.8e-6, dit=0.3,
         hdu.header['CDELT1']=conf['band_specs'][hdu.header['BAND']]['pscale']*0.000277778/1000.
         hdu.header['CDELT2']=conf['band_specs'][hdu.header['BAND']]['pscale']*0.000277778/1000. # mas to degrees
         print(conf)
-        hdu.header['EXPTIME']=dit#conf['dit']
+        hdu.header['EXPTIME']=dit #conf['dit']
         hdu.header["CTYPE1"]  = 'RA---TAN'
         hdu.header["CTYPE2"]  = 'DEC--TAN'
         hdu.header['CUNIT1']='deg'
         hdu.header['CUNIT2']='deg'
         if conf['ScopeSim_LMS']==False:
             hdu.header['BUNIT']="photons/s" # BUNIT overridden by use of Vega spectrum in scopesim
-        hdu.header["CRPIX1"]=800
-        hdu.header["CRPIX2"]=800
+        print("band is ",hdu.header['BAND'])
+        if hdu.header['BAND'] in ["N1","N2","N1a","N2a"]:
+            hdu.header['CRPIX1']=163
+            hdu.header['CRPIX2']=163
+        else:
+            hdu.header["CRPIX1"]=202
+            hdu.header["CRPIX2"]=202
         hdu.header["CRVAL1"]=0
         hdu.header["CRVAL2"]=0
         
@@ -153,8 +158,8 @@ def background(psf_ON, psf_OFF, header=None, mode='RAVC', lam=3.8e-6, dit=0.3,
             hdu.header['CUNIT2']='deg'
             hdu.header['CUNIT3']='um'
             hdu.header['BUNIT']="erg/cm^2/s/angstrom" # BUNIT overridden by use of Vega spectrum in scopesim
-            hdu.header["CRPIX1"]=200#1024
-            hdu.header["CRPIX2"]=200#1024 # this needs to be half of naxis1 otherwise it will put the star at the wrong center
+            hdu.header["CRPIX1"]=202#1024
+            hdu.header["CRPIX2"]=202#1024 # this needs to be half of naxis1 otherwise it will put the star at the wrong center
             hdu.header["CRPIX3"]=0
             hdu.header["CRVAL1"]=0
             hdu.header["CRVAL2"]=0
